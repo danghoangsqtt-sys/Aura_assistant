@@ -1,0 +1,9 @@
+{
+  "name": "Aura AI Assistant v2.0",
+  "description": "A client-side AI assistant with voice interaction and customizable persona.",
+  "requestFramePermissions": [
+    "microphone",
+    "geolocation",
+    "camera"
+  ]
+}

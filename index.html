@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <!-- Live2D Cubism Core -->
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <!-- PIXI JS and PIXI Live2D Display via CDN to prevent Vite CJS require() error -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.3.2/dist/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+    <title>Aura Assistant</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&family=Playfair+Display:ital,wght@1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // Fallback for environments that serve raw index.css without PostCSS/Tailwind processing.
+      // If utility classes are missing, load Tailwind CDN at runtime to prevent broken UI.
+      (function () {
+        function hasTailwindUtilities() {
+          const probe = document.createElement("div");
+          probe.className = "hidden";
+          document.body.appendChild(probe);
+          const ok = window.getComputedStyle(probe).display === "none";
+          probe.remove();
+          return ok;
+        }
+
+        function loadTailwindCdn() {
+          if (document.querySelector('script[data-tailwind-fallback="1"]'))
+            return;
+          const script = document.createElement("script");
+          script.src = "https://cdn.tailwindcss.com";
+          script.setAttribute("data-tailwind-fallback", "1");
+          document.head.appendChild(script);
+        }
+
+        function ensureTailwind() {
+          try {
+            if (!hasTailwindUtilities()) loadTailwindCdn();
+          } catch (e) {
+            loadTailwindCdn();
+          }
+        }
+
+        if (document.readyState === "loading") {
+          document.addEventListener("DOMContentLoaded", ensureTailwind, {
+            once: true,
+          });
+        } else {
+          ensureTailwind();
+        }
+      })();
+    </script>
+    <style>
+      body {
+        background-color: transparent;
+        color: #fff;
+        overflow: hidden;
+        /* Prevent scrolling */
+      }
+
+      .text-glow-purple {
+        text-shadow: 0 0 30px rgba(168, 85, 247, 0.4);
+      }
+
+      .text-glow-blue {
+        text-shadow: 0 0 30px rgba(59, 130, 246, 0.4);
+      }
+
+      /* Utility for gradient text animation */
+      .animate-text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 300% 300%;
+        animation: gradient-xy 8s ease infinite;
+      }
+    </style>
+    <link rel="stylesheet" href="/index.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.2",
+          "react/": "https://aistudiocdn.com/react@^19.2.1/",
+          "react": "https://aistudiocdn.com/react@^19.2.1",
+          "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
+          "@google/genai": "https://aistudiocdn.com/@google/genai@^1.32.0",
+          "vite": "https://aistudiocdn.com/vite@^7.2.7",
+          "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
+          "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.25"
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+# Aura Assistant Embedded CLIProxyAPI Config
+# This file is auto-generated for the embedded proxy server
+
+host: "127.0.0.1"
+port: 8318
+tls:
+  enable: false
+remote-management:
+  allow-remote: false
+  secret-key: "$2a$10$DqgyaONN5Sg1kboKegNGuuK.2rum1fkE8rX6nzrWp65s7wqNpgTSm"
+  disable-control-panel: true
+# Auth directory — relative to binary location
+auth-dir: "./auths"
+# API keys accepted by the proxy
+api-keys:
+  - "aura-assistant-bypass"
+# Gemini API — BYOA mode (user's OAuth token is forwarded directly)
+gemini-api-key:
+  - api-key: "placeholder-not-used"
+    base-url: "https://generativelanguage.googleapis.com"
+debug: false
+request-retry: 3
+cors:
+  allowed-origins:
+    - "http://localhost:5173"
+    - "http://127.0.0.1:5173"

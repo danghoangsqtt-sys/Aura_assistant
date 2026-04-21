@@ -1,0 +1,9 @@
+Aura Assistant — Phần mềm Trợ lý AI Giọng nói
+Copyright © 2025-2026 DH System — Đăng Hoàng
+All rights reserved.
+
+Phần mềm này được phát triển và phân phối bởi DH System.
+Nghiêm cấm sao chép, phân phối lại hoặc sửa đổi khi chưa có sự 
+cho phép bằng văn bản của tác giả.
+
+Powered by Google Gemini Live API.

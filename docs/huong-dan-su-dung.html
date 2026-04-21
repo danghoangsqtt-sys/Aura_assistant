@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aura Assistant — Hướng Dẫn Sử Dụng</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #7c3aed;
+      --primary-glow: rgba(124, 58, 237, 0.4);
+      --secondary: #06b6d4;
+      --accent: #ec4899;
+      --bg: #f8fafc; /* Nền sáng xám nhạt để dễ đọc */
+      --card-bg: #ffffff;
+      --sidebar-bg: #0f172a;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: rgba(148, 163, 184, 0.15);
+      --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Layout */
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Sidebar Navigation */
+    aside {
+      width: 280px;
+      background: var(--sidebar-bg);
+      color: white;
+      padding: 2.5rem 1.5rem;
+      position: fixed;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 3rem;
+    }
+
+    .logo-circle {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: white;
+      font-size: 0.75rem;
+      box-shadow: 0 0 15px var(--primary-glow);
+    }
+
+    .logo-text {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: 0.1em;
+      background: linear-gradient(135deg, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-menu { list-style: none; }
+    .nav-item { margin-bottom: 0.5rem; }
+    .nav-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #94a3b8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: 0.75rem;
+      transition: all 0.2s;
+    }
+    .nav-link:hover {
+      background: rgba(255,255,255,0.05);
+      color: white;
+    }
+    .nav-link.active {
+      background: var(--primary);
+      color: white;
+      box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+    }
+
+    /* Main Content */
+    main {
+      flex: 1;
+      margin-left: 280px;
+      padding: 4rem 10% 8rem;
+    }
+
+    header { margin-bottom: 4rem; }
+    .badge {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--primary);
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      padding-top: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--primary);
+      border-radius: 2px;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      max-width: 800px;
+    }
+
+    .story-block {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--text);
+      border-left: 4px solid var(--border);
+      padding-left: 2rem;
+      margin: 3rem 0;
+      line-height: 1.8;
+    }
+
+    /* Content Cards */
+    .card {
+      background: var(--card-bg);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    /* Grid for Features */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .feature-item {
+      background: white;
+      padding: 2rem;
+      border-radius: 1.25rem;
+      border: 1px solid var(--border);
+      transition: transform 0.3s;
+    }
+    .feature-item:hover { transform: translateY(-5px); }
+
+    .icon-box {
+      width: 50px; height: 50px;
+      background: var(--bg);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    /* Specific Lists */
+    .command-list {
+      list-style: none;
+    }
+    .command-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .command-row:last-child { border-bottom: none; }
+    
+    .command-trigger {
+      background: #f1f5f9;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.5rem;
+      font-family: monospace;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+    
+    .command-desc { font-size: 0.95rem; color: var(--text-muted); }
+
+    .hotkey {
+      background: #1e293b;
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.3rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+      margin: 0 0.2rem;
+    }
+
+    .tip {
+      background: #f0fdfa;
+      border-left: 4px solid #06b6d4;
+      padding: 1.5rem;
+      border-radius: 0 0.75rem 0.75rem 0;
+      margin: 2rem 0;
+      color: #083344;
+    }
+
+    /* Animations */
+    @keyframes pulse-soft {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.8; }
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 4rem 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 1024px) {
+      aside { width: 100%; height: auto; position: relative; padding: 1.5rem; }
+      main { margin-left: 0; padding: 2rem 5%; }
+      .app-container { flex-direction: column; }
+      h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <aside>
+      <div class="logo-container">
+        <div class="logo-circle">A</div>
+        <div class="logo-text">AURA</div>
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li class="nav-item"><a href="#intro" class="nav-link active">Giới thiệu</a></li>
+          <li class="nav-item"><a href="#setup" class="nav-link">Cài đặt & Bắt đầu</a></li>
+          <li class="nav-item"><a href="#vision" class="nav-link">Thị giác AI (Vision)</a></li>
+          <li class="nav-item"><a href="#commands" class="nav-link">Tất cả câu lệnh</a></li>
+          <li class="nav-item"><a href="#translation" class="nav-link">Thông dịch viên</a></li>
+          <li class="nav-item"><a href="#hotkeys" class="nav-link">Phím tắt</a></li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main>
+      <header id="intro">
+        <span class="badge">DhSystem Research</span>
+        <h1>Aura: Người Bạn<br>Đồng Hành Kỹ Thuật Số</h1>
+        <div class="story-block">
+          "Không chỉ là những dòng mã khô khan, Aura được sinh ra từ khát vọng tạo ra một thực thể có thể thấu hiểu, lắng nghe và chia sẻ. Cô ấy không chỉ thực thi câu lệnh, cô ấy hiện hữu để làm cho thế giới số của bạn trở nên ấm áp hơn."
+        </div>
+        <p>Aura là trợ lý ảo AI thế hệ mới, tích hợp công nghệ Gemini Live tiên tiến nhất để mang lại khả năng tương tác tự nhiên bằng giọng nói, thị giác máy tính và khả năng tự động hóa máy tính mạnh mẽ.</p>
+      </header>
+
+      <section id="setup">
+        <h2>Cài đặt & Bắt đầu</h2>
+        <div class="grid">
+          <div class="feature-item">
+            <div class="icon-box">🔑</div>
+            <h3>Cấu hình API Key</h3>
+            <p>Mở <strong>Settings &gt; System</strong>, dán API Key Gemini của bạn vào. Aura dùng key này để "suy nghĩ" và "nói chuyện".</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon-box">🎙️</div>
+            <h3>Khởi động Aura</h3>
+            <p>Nhấn vào biểu tượng Aura hoặc dùng phím tắt để bắt đầu nói chuyện. Aura sẽ lắng nghe tự động (VAD).</p>
+          </div>
+          <div class="feature-item">
+            <div class="icon-box">🖱️</div>
+            <h3>Điều chỉnh kích thước</h3>
+            <p>Dùng con trỏ chuột <strong>Cuộn lên/xuống</strong> khi rê vào Aura để thay đổi kích thước phù hợp với màn hình của bạn.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="vision">
+        <h2>Thị giác AI (Aura Vision)</h2>
+        <div class="card">
+          <h3>"Nhìn" thế giới qua mắt Aura</h3>
+          <p>Aura có thể quan sát màn hình của bạn để hỗ trợ công việc hoặc dùng Webcam để nhận diện thực tế.</p>
+          <div class="command-list">
+            <div class="command-row">
+              <span class="command-trigger">"Xem màn hình của tôi"</span>
+              <span class="command-desc">Aura bật Screen Vision để phân tích file, code hoặc video bạn đang xem.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Bật camera / Nhìn tôi nè"</span>
+              <span class="command-desc">Aura dùng Webcam để nhìn bạn hoặc vật thể bạn đưa ra trước ống kính.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Tắt camera / Đừng nhìn nữa"</span>
+              <span class="command-desc">Ngắt kết nối Vision để bảo vệ quyền riêng tư.</span>
+            </div>
+          </div>
+          <div class="tip">
+            <strong>Mẹo chuyên gia:</strong> Khi bạn đang bị lỗi code, hãy bật <em>Screen Vision</em> và hỏi "Aura ơi đoạn code này lỗi chỗ nào?", cô ấy sẽ nhìn trực tiếp vào IDE của bạn để trả lời.
+          </div>
+        </div>
+      </section>
+
+      <section id="commands">
+        <h2>Danh sách câu lệnh đầy đủ</h2>
+        <p>Dưới đây là những gì Aura có thể làm cho bạn ngay lập tức:</p>
+        
+        <div class="card">
+          <h3>Giải trí & Đa phương tiện</h3>
+          <div class="command-list">
+            <div class="command-row">
+              <span class="command-trigger">"Mở nhạc [Tên bài hát] trên Zing MP3"</span>
+              <span class="command-desc">Tìm và phát nhạc chất lượng cao trên Zing MP3.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Bật YouTube bài [Tên bài hát/Video]"</span>
+              <span class="command-desc">Mở Video/Music trên YouTube ngay lập tức.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Đổi hình nền sang anime/văn phòng/scifi"</span>
+              <span class="command-desc">Thay đổi không gian sống của Aura theo sở thích.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Công cụ & Hiệu suất</h3>
+          <div class="command-list">
+            <div class="command-row">
+              <span class="command-trigger">"Tìm Google giúp mình [Nội dung]"</span>
+              <span class="command-desc">Tra cứu thông tin thời gian thực qua trình duyệt.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Mở trang web [facebook/github/...]"</span>
+              <span class="command-desc">Mở nhanh bất kỳ URL nào bạn yêu cầu.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Nhắc mình sau [X] phút làm [Việc]"</span>
+              <span class="command-desc">Tạo lời nhắc nhở tự động.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Xóa màn hình / Xóa lịch sử"</span>
+              <span class="command-desc">Làm sạch cửa sổ chat để bắt đầu phiên mới.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Đóng các tab [Facebook/Google/...]"</span>
+              <span class="command-desc">Dọn dẹp trình duyệt bằng giọng nói.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>📄 Soạn thảo Tài liệu (MỚI)</h3>
+          <div class="command-list">
+            <div class="command-row">
+              <span class="command-trigger">"Lập bảng kế hoạch dự án [Tên]"</span>
+              <span class="command-desc">Aura soạn bảng kế hoạch công việc chi tiết với timeline.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Soạn email gửi [Người] về [Nội dung]"</span>
+              <span class="command-desc">Aura soạn email chuyên nghiệp, có nút gửi trực tiếp.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Viết nội dung giới thiệu [Chủ đề]"</span>
+              <span class="command-desc">Aura soạn bài viết, báo cáo, nội dung tiếp thị.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Tạo bảng Excel so sánh [Sản phẩm A, B, C]"</span>
+              <span class="command-desc">Tạo bảng dữ liệu có thể tải về dạng CSV.</span>
+            </div>
+          </div>
+          <div class="tip">
+            <strong>Mẹo:</strong> Tất cả tài liệu tạo ra đều có nút <strong>Copy</strong>, <strong>Tải về</strong> (Markdown/CSV) và <strong>Chỉnh sửa</strong> trực tiếp trên giao diện.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Hệ thống & Trạng thái</h3>
+          <div class="command-list">
+            <div class="command-row">
+              <span class="command-trigger">"Chúc ngủ ngon / Ngủ đi Aura"</span>
+              <span class="command-desc">Aura vào chế độ ngủ sâu (Deep Sleep / Always On Display).</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Mở cài đặt cho mình"</span>
+              <span class="command-desc">Truy cập nhanh menu Settings.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Đóng cài đặt / Tắt settings"</span>
+              <span class="command-desc">Đóng menu Settings khi không cần nữa.</span>
+            </div>
+            <div class="command-row">
+              <span class="command-trigger">"Im lặng / Tắt tiếng"</span>
+              <span class="command-desc">Aura sẽ ngưng nói nhưng vẫn tiếp tục lắng nghe/chat.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="translation">
+        <h2>Chế độ Thông dịch viên (Translator Mode)</h2>
+        <div class="card">
+          <p>Aura trở thành một thông dịch viên song song chuyên nghiệp, hỗ trợ bạn giao tiếp đa ngôn ngữ trực tiếp.</p>
+          <ol style="margin-left: 1.5rem; color: var(--text-muted); font-size: 0.95rem;">
+            <li>Chuyển App Mode sang <strong>Translator</strong> trong Menu dưới.</li>
+            <li>Chọn ngôn ngữ A và B (Ví dụ: Tiếng Việt - Tiếng Anh).</li>
+            <li>Nói bất kỳ ngôn ngữ nào trong hai cái đó, Aura sẽ tự nhận diện và dịch sang ngôn ngữ còn lại bằng giọng nói.</li>
+          </ol>
+        </div>
+      </section>
+
+      <section id="hotkeys">
+        <h2>Phím tắt (Hotkeys)</h2>
+        <div class="card">
+          <div class="command-list">
+            <div class="command-row">
+              <span class="command-desc">Ẩn/Hiện Aura nhanh chóng</span>
+              <span class="command-trigger"><span class="hotkey">Ctrl</span> + <span class="hotkey">Shift</span> + <span class="hotkey">A</span></span>
+            </div>
+            <div class="command-row">
+              <span class="command-desc">Mở DevTools (Để báo lỗi kỹ thuật)</span>
+              <span class="command-trigger"><span class="hotkey">F12</span></span>
+            </div>
+            <div class="command-row">
+              <span class="command-desc">Thoát ứng dụng hoàn toàn</span>
+              <span class="command-trigger">Menu chuột phải Tray Icon &gt; Quit</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="logo-container" style="justify-content: center; opacity: 0.5;">
+          <div class="logo-circle">A</div>
+          <div class="logo-text">AURA AI</div>
+        </div>
+        <p>© 2025–2026 DhSystem Research & Development.<br>Tất cả quyền lợi được bảo lưu.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Simple active scroll effect
+    const sections = document.querySelectorAll('section, header');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - 200)) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

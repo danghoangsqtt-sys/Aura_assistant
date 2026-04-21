@@ -1,0 +1,1 @@
+import { GoogleGenAI } from '@google/genai'; const ai = new GoogleGenAI({apiKey: 'dummy'}); ai.clients.createLiveSession({model: 'dummy'}).then(s => console.log(s.send.toString())).catch(e => console.log(e));
